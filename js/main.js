@@ -1,21 +1,16 @@
-// version 1.5
-//var firstname = document.getElementById("name");
-//var firstname = $("#name");
-//var lastname = document.getElementById("lastname");
-//var email = document.getElementById("input-email");
-//var pass = document.getElementById("input-password");
+// version 2.0
 
 function showMessage(_input, _message) {
     return $(_input).parent().append($('<span>'+_message+'</span>'));
 }
 
 function validateEmpty(_allinputs) {
-    //console.log(_allinputs);
-    if (_allinputs.val() == "" && $(_allinputs).nextSibling == null) {
+    
+    if ($(_allinputs).val() == "" && $(_allinputs).next().length == 0) {
         return showMessage(_allinputs, "Este campo es obligatorio");
     }
-    if (_allinputs.val() != "" && _allinputs.nextSibling != null) {
-        _allinputs.parentNode.removeChild(_allinputs.nextSibling);
+    if ($(_allinputs).val() != "" && $(_allinputs).next() != 0) {
+        $(_allinputs).parent().children("span").remove().end();
     }
 }
 
@@ -48,12 +43,10 @@ function validatePass(_pass) {
 
 function validateForm(evt) {
     //$("#firstname").validateEmpty(); $('#lastname').validateEmpty(); $('#email').validateEmpty(); $('#pass').validateEmpty();
-    console.log($('#name'));
+    //console.log($('#name'));
     validateEmpty($('#name')); validateEmpty($('#lastname')); validateEmpty($('#input-email')); validateEmpty($('#input-password'));
     validateNames($('#name')); validateNames($('#lastname'));
     validateMail($('#input-email'));
     validatePass($('#input-password'));
-    //console.log(firstname);
-    //console.log($("#name")[0]);
     evt.preventDefault();
 }
